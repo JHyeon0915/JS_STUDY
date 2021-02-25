@@ -1,0 +1,45 @@
+1. react와 reactDom의 차이
+react : UI라이브러리
+reactDom : 리액트를 웹사이트에 출력하는 걸 도와주는 모델
+           1개의 컴포넌트를 출력(render)
+
+2. Target container is not a DOM element 오류
+원인 : DOM이 렌더링되기 전에 DOM elemnt를 참조할 경우에 발생
+
+3. props와 state개념
+
+state : 리액트 컴포넌트 안에 있는 오브젝트
+        state가 바뀔 때마다 render가 발생한다. -> 직접적으로 state를 변경하거나 사용하면 안됨
+        *즉, state를 변경하면 render는 새로운 state와 함꼐 다시 작동한다.*
+        this.setState 사용
+        모든 컴포넌트가 state를 가질 필요는 없다.
+        
+4. Each child in a list should have a unique "key" prop. 오류
+원인 : 리액트는 엘리먼트가 많을 경우 key라는 것을 부여해야 한다. (id를 부여)
+해결 : key를 Api에서 제공해주는 id값으로 변경
+
+5.  Support for the experimental syntax 'classProperties' isn't currently enabled 오류
+원인 : classProperties 플러그인을 못찾음
+해결 : .babel.config.js파일에 plugins 추가
+
+6. 컴포넌트의 라이프사이클
+    컴포넌트는 여러 기능들을 정해진 순서대로 실행한다.
+    render과정 : 1. willMount 2. render 3. didMount
+        이 3가지는 컴포넌트가 존재하기 시작할 때 작동한다
+    update과정 : 1. WillReceiveProps 2. Update 3. WillUpdate 4. render 5. didMount
+        리액트는 update를 true로 생각한다.
+
+7. uncaught referenceerror: regeneratorruntime is not defined과 this.setdynamic is not a function 오류
+원인 : 바벨 polyfill과 transform-runtime설치 필요
+해결 : 1. 다음 명령어 실행
+          npm install babel-polyfill
+          npm install --save-dev @babel/plugin-transform-runtime
+          npm install --save @babel/runtime
+       2. babel.config.js에서 plugins에 "@babel/plugin-transform-runtime"과 "bable-polyfill" 추가
+
+8. alt란
+
+9. css syntax에러
+원인 : css-loader설치가 안되어있었음
+해결 : 1. npm install css-loader
+       2. webpack.config.js에서 rules 밑에 {test: /\css$/, use: 'css-loader'} 추가
